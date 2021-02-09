@@ -35,6 +35,7 @@ public class StepImplementation {
         implementation1("https://translate.google.com/?hl=es");
         implementation2("Hello");
         implementation4("Hola");
+        closed();
     }
 
 
@@ -57,7 +58,8 @@ public class StepImplementation {
         TraductorPage traductorPage = new TraductorPage(driver);
         String result = traductorPage.translatedWord();
         Gauge.captureScreenshot();
-        assertEquals("Hola", result);
+        assertEquals(wortExpected, result);
+        System.out.print("El resultados traducido es: " + result);
     }
     
 }
