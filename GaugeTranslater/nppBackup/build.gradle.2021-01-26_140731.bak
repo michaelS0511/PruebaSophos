@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'org.gauge' version '1.8.1'
+}
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+group = 'millicom'
+version = '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.thoughtworks.gauge:gauge-java:0.7.2'
+	implementation 'org.seleniumhq.selenium:selenium-java:3.13.0'
+	implementation 'io.github.bonigarcia:webdrivermanager:3.7.1'
+	implementation 'org.assertj:assertj-core:3.10.0'
+
+}
+
+task gaugeTest(type: com.thoughtworks.gauge.gradle.GaugeTask){
+    doFirst {
+        gauge{
+            inParallel = true
+            nodes = 1
+            env = 'default'
+            additionalFlags = '--verbose'
+        }
+    }
+}
+
+
+
